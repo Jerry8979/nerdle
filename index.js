@@ -17,7 +17,7 @@ const input = new Array(8).fill(null);
 let a, b, c, d, this_op, answer;
 const NumberOfBox = bid.length;
 const NumberOfRow = NumberOfBox/8;
-const OP = ["+","-","*","/"];
+const OP = ["+","-","*","/","="];
 const btn = document.getElementById("btn");
 const btn_del = document.getElementById("del");
 const btn_enter = document.getElementById("enter");
