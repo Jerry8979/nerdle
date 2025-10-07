@@ -1,0 +1,46 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 5px;
+}
+.box{
+    width: 50px;
+    height: 50px;
+    font-size: 3em;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid white;
+    background-color: rgb(215, 204, 204);
+}
+.Num{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+}
+.Op{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+}
+.op{
+    padding: 6px 15px;
+    font-size: 1.5em;
+    text-align: center;
+    border-radius: 10px;
+}
+.num{
+    padding: 6px 10px;
+    font-size: 1.5em;
+    text-align: center;
+    border-radius: 10px;
+}
+.b{
+    padding: 20px 20px;
+    font-size: 4em;
+}
+#box1{
+    border: 2px solid black;
+}
