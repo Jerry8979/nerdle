@@ -52,7 +52,7 @@ for (let i=0; i<10; i++){
 for (let i=0; i<5; i++){
     ops[i] = document.getElementById(oid[i]);
     ops[i].onclick = function(){
-        if (end = false){
+        if (end == false){
             let text = OP[i];
             input[cur%8] = text;
             boxes[cur].textContent = text;
