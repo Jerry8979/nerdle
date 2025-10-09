@@ -24,7 +24,6 @@ const btn_enter = document.getElementById("enter");
 
 let cur = 0;
 let row = 0;
-let temp = 0;
 
 for (let i=0; i<NumberOfBox; i++){
     boxes[i] = document.getElementById(bid[i]);
@@ -63,12 +62,24 @@ for (let i=0; i<5; i++){
 
 function next(){
     set_border(0);
-    if (cur % 8 != 7){
-        cur++;
+    if (cur % 8 == 7){
+        let first_null = input.indexOf(null);
+        if (first_null != -1){
+            cur = row * 8 + first_null;
+        }
     }
-    //cur %= 8;
+    else {
+        //cur++;
+        let first_null = input.indexOf(null, cur%8);
+        let second_null = input.indexOf(null);
+        if (first_null != -1){
+            cur = row * 8 + first_null;
+        }
+        else if (second_null != -1){
+            cur = row * 8 + second_null;
+        }
+    }
     set_border(1);
-    
 }
 
 function set_border(is_set){
@@ -84,7 +95,7 @@ function set_border(is_set){
 
 
 btn_del.onclick = function(){
-    if (cur == 0){
+    if (cur%8 == 0){
         input[cur%8] = null;
         boxes[cur].textContent = "";
     }
@@ -108,21 +119,23 @@ btn_enter.onclick = function(){
     else{
         for (let i=0; i<8; i++){
             let index = row * 8 + i;
-            if (answer[i] === boxes[index].textContent){
+            if (input[i] == answer[i]){
                 boxes[index].style.color = 'green';
             }
-            else{
+            else if (answer.includes(input[i])){
+                boxes[index].style.color = 'blue';
+            }
+            else {
                 boxes[index].style.color = 'red';
             }
         }
         for (let i=0;i<8;i++) {input[i] = null;}
         row++;
-        boxes[cur].style.border = "";
+        set_border(0);
         if (row < NumberOfRow){
             cur = row * 8;
-            boxes[cur].style.border = "2px solid black";
+            set_border(1);
         }
-
     }
 }
 
