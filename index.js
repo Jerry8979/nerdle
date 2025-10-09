@@ -24,11 +24,12 @@ const btn_enter = document.getElementById("enter");
 
 let cur = 0;
 let row = 0;
+let end = false;
 
 for (let i=0; i<NumberOfBox; i++){
     boxes[i] = document.getElementById(bid[i]);
     boxes[i].onclick = function(){
-        if (Math.floor(i/8) == row){
+        if (end == false && Math.floor(i/8) == row){
             set_border(0);
             cur = i;
             set_border(1);
@@ -39,7 +40,7 @@ for (let i=0; i<NumberOfBox; i++){
 for (let i=0; i<10; i++){
     nums[i] = document.getElementById(nid[i]);
     nums[i].onclick = function(){
-        if (row < NumberOfRow){
+        if (end == false){
             let text = nums[i].textContent;
             input[cur%8] = text;
             boxes[cur].textContent = text;
@@ -51,7 +52,7 @@ for (let i=0; i<10; i++){
 for (let i=0; i<5; i++){
     ops[i] = document.getElementById(oid[i]);
     ops[i].onclick = function(){
-        if (row < NumberOfRow){
+        if (end = false){
             let text = OP[i];
             input[cur%8] = text;
             boxes[cur].textContent = text;
@@ -95,6 +96,7 @@ function set_border(is_set){
 
 
 btn_del.onclick = function(){
+    if (end == true) {return;}
     if (cur%8 == 0){
         input[cur%8] = null;
         boxes[cur].textContent = "";
@@ -113,10 +115,12 @@ btn_del.onclick = function(){
 }
 
 btn_enter.onclick = function(){
+    if (end == true) {return;}
     if (input.includes(null)){
         console.log("Null value exists.");
     }
     else{
+        end = true;
         for (let i=0; i<8; i++){
             let index = row * 8 + i;
             if (input[i] == answer[i]){
@@ -124,15 +128,18 @@ btn_enter.onclick = function(){
             }
             else if (answer.includes(input[i])){
                 boxes[index].style.color = 'blue';
+                end = false;
             }
             else {
                 boxes[index].style.color = 'red';
+                end = false;
             }
         }
+        set_border(0);
         for (let i=0;i<8;i++) {input[i] = null;}
         row++;
-        set_border(0);
-        if (row < NumberOfRow){
+        if (row >= NumberOfRow) {end = true;}
+        if (end == false){
             cur = row * 8;
             set_border(1);
         }
